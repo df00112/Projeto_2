@@ -459,7 +459,7 @@ void Game::player_movement(string action) {
 	case's':
 		cout << "Player's Row = " << player.getRow() << endl;
 		cout << "Player's Col = " << player.getCol() << endl;
-		cout << "Press Enter to Continue";
+		cout << "Enter anything to Continue... ";
 		cin.ignore(); cin.get();
 		break;
 	case 'A':
