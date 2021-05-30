@@ -43,7 +43,7 @@ private:
 	void showGameDisplay();
 
 	// player movement
-	void player_movement(char action);
+	void player_movement(string action);
 
 	// robot movement
 	void robot_movement(vector<Robot>::iterator robot);
@@ -72,6 +72,8 @@ private:
 	// mark end time
 	void endtime();
 
+	// check if an action is valid
+	bool verifyaction(string action);
 private:
 
 	//in a game there are: 

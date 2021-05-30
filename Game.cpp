@@ -4,6 +4,7 @@
 #include <sstream>;
 #include <iostream>
 #include <time.h>
+#include <conio.h>
 
 using namespace std;
 Game::Game(const string& mazenumber) {
@@ -273,8 +274,9 @@ bool Game::collide(Player& player, Post& post) {
 }
 
 //movimentos 
-void Game::player_movement(char action) {
-	switch (action) {
+void Game::player_movement(string action) {
+	const char *cstr = action.c_str(); 
+	switch (*cstr) {
 	case'C':
 	case'c':
 		player.setRow(player.getRow() + 1);
@@ -456,8 +458,15 @@ void Game::player_movement(char action) {
 
 	case 'S':
 	case's':
-		cout << player.getRow();
-		cout << player.getCol();
+		cout << "Player's Row = " << player.getRow() << endl;
+		cout << "Player's Col = " << player.getCol() << endl;
+		cout << "Action? "; cin >> action;
+		while (verifyaction(action) == false) {
+			ctrlzexit();
+			cout << "Incorrect action!" << endl;
+			cout << "Action? "; cin >> action;
+		}
+		player_movement(action);
 		break;
 	case 'A':
 	case'a':
@@ -554,18 +563,18 @@ void Game::player_movement(char action) {
 			}
 		}
 		break;
-	default:
-		ctrlzexit();
-		cout << "Incorrect action!" << endl;
-		cout << "Action? "; cin >> action;
-		player_movement(action);
 	}
 }
 
 //player's and robots' actions
 void Game::tryy() {
-	unsigned char action;
+	string action;
 	cout << "Action? "; cin >> action;
+	while (verifyaction(action) == false) {
+		ctrlzexit();
+		cout << "Incorrect action!" << endl;
+		cout << "Action? "; cin >> action;
+	}
 	player_movement(action);
 	for (auto robot = begin(robots); robot != end(robots); robot++) {
 		if (robot->getSymbol() == 'R') // o robot só se move se ainda nao estiver morto 
@@ -607,5 +616,13 @@ bool Game::collide(Robot& robot, ExitDoor& door) {
 	if (robot.getCol() == door.getCol() && robot.getRow() == door.getRow()) {
 		return true;
 	}
+	else return false;
+}
+
+// verifica se trata de uma acao valida
+bool Game::verifyaction(string action) {
+	if (action == "q" || action == "w" || action == "e" || action == "a" || action == "s" || action == "d" || action == "z" || action =="x" || action == "c"\
+	|| action == "Q" || action == "W" || action == "E" || action == "A" || action == "S" || action == "D" || action == "Z" || action == "X" || action == "C")
+		return true;
 	else return false;
 }
