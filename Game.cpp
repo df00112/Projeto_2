@@ -4,7 +4,6 @@
 #include <sstream>;
 #include <iostream>
 #include <time.h>
-#include <conio.h>
 
 using namespace std;
 Game::Game(const string& mazenumber) {
@@ -460,13 +459,8 @@ void Game::player_movement(string action) {
 	case's':
 		cout << "Player's Row = " << player.getRow() << endl;
 		cout << "Player's Col = " << player.getCol() << endl;
-		cout << "Action? "; cin >> action;
-		while (verifyaction(action) == false) {
-			ctrlzexit();
-			cout << "Incorrect action!" << endl;
-			cout << "Action? "; cin >> action;
-		}
-		player_movement(action);
+		cout << "Press Enter to Continue";
+		cin.ignore(); cin.get();
 		break;
 	case 'A':
 	case'a':
